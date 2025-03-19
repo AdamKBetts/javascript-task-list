@@ -33,3 +33,29 @@ This is a basic task list web application built using HTML, CSS, and JavaScript.
 ## Project Structure
 
 The project has the following structure:
+task-list/
+├── index.html    # The main HTML file containing the structure.
+├── style.css     # The CSS file containing the styling.
+└── script.js     # The JavaScript file containing the functionality.
+└── README.md     # This file, providing information about the project.
+## Potential Future Enhancements
+
+Here are some ideas for future improvements to this task list:
+
+* **Marking Tasks as Complete:** Add a way to mark tasks as done (e.g., by clicking on the task).
+* **Saving Tasks to Local Storage:** Persist tasks even after the browser is closed.
+* **Editing Tasks:** Allow users to modify existing tasks.
+* **Prioritizing Tasks:** Add a way to set and display task priorities.
+* **More Advanced Styling:** Improve the visual design and user experience.
+
+## Author
+
+Adam - https://github.com/AdamKBetts
+
+## License
+
+This project is open source and does not have a specific license at this time. Feel free to use and learn from it.
+
+---
+
+Thank you for checking out my Simple JavaScript Task List!
