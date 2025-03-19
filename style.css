@@ -80,3 +80,8 @@ h1{
 .delete-btn:hover {
     background-color: #c82333;
 }
+
+.task-text.completed{
+    text-decoration: line-through;
+    color: #888;
+}
