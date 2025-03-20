@@ -85,3 +85,18 @@ h1{
     text-decoration: line-through;
     color: #888;
 }
+
+.edit-btn, .save-edit-btn {
+    background-color: #00c853; /* Green color */
+    color: white;
+    border: none;
+    padding: 5px 10px;
+    border-radius: 4px;
+    cursor: pointer;
+    font-size: 14px;
+    margin-left: 5px;
+}
+
+.edit-btn:hover, .save-edit-btn:hover {
+    background-color: #008000; /* Darker green */
+}
