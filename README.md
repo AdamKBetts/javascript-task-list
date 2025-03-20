@@ -6,22 +6,24 @@ This is a basic task list web application built using HTML, CSS, and JavaScript.
 
 ## Features
 
-* **Add Tasks:** Users can type in a new task and click the "Add" button (or press Enter) to add it to the list.
-* **Delete Tasks:** Each task in the list has a "Delete" button that, when clicked, removes the task from the list.
+- **Add Tasks:** Users can type in a new task and click the "Add" button (or press Enter) to add it to the list.
+- **Delete Tasks:** Each task in the list has a "Delete" button that, when clicked, removes the task from the list.
 
 ## Technologies Used
 
-* HTML: For structuring the web page.
-* CSS: For styling the visual appearance of the application.
-* JavaScript: For handling the interactivity and dynamic updates to the task list.
+- HTML: For structuring the web page.
+- CSS: For styling the visual appearance of the application.
+- JavaScript: For handling the interactivity and dynamic updates to the task list.
 
 ## How to Run Locally
 
 1.  **Clone the Repository (if you haven't already):**
     If you haven't already cloned this repository to your local machine, you can do so using the following command in your terminal:
+
     ```bash
     git clone <repository-url>
     ```
+
     Replace `<repository-url>` with the actual URL of your repository on GitHub.
 
 2.  **Open the `index.html` file:**
@@ -34,19 +36,17 @@ This is a basic task list web application built using HTML, CSS, and JavaScript.
 
 The project has the following structure:
 task-list/
-├── index.html    # The main HTML file containing the structure.
-├── style.css     # The CSS file containing the styling.
-└── script.js     # The JavaScript file containing the functionality.
-└── README.md     # This file, providing information about the project.
+├── index.html # The main HTML file containing the structure.
+├── style.css # The CSS file containing the styling.
+└── script.js # The JavaScript file containing the functionality.
+└── README.md # This file, providing information about the project.
+
 ## Potential Future Enhancements
 
 Here are some ideas for future improvements to this task list:
 
-* **Marking Tasks as Complete:** Add a way to mark tasks as done (e.g., by clicking on the task).
-* **Saving Tasks to Local Storage:** Persist tasks even after the browser is closed.
-* **Editing Tasks:** Allow users to modify existing tasks.
-* **Prioritizing Tasks:** Add a way to set and display task priorities.
-* **More Advanced Styling:** Improve the visual design and user experience.
+- **Prioritizing Tasks:** Add a way to set and display task priorities.
+- **More Advanced Styling:** Improve the visual design and user experience.
 
 ## Author
 
