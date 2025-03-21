@@ -34,6 +34,17 @@ function addTaskToDOM(text, completed) {
     checkbox.type = 'checkbox';
     checkbox.classList.add('task-checkbox');
     checkbox.checked = completed;
+    checkbox.id = `task-${Date.now()}`;
+
+    const customCheckboxSpan = document.createElement('span');
+    customCheckboxSpan.classList.add('custom-checkbox');
+
+    const checkboxLabel = document.createElement('label');
+    checkboxLabel.classList.add('checkbox-label-container');
+    checkboxLabel.setAttribute('for', checkbox.id);
+
+    checkboxLabel.appendChild(checkbox);
+    checkboxLabel.appendChild(customCheckboxSpan);
 
     const taskSpan = document.createElement('span');
     taskSpan.classList.add('task-text');
@@ -43,9 +54,9 @@ function addTaskToDOM(text, completed) {
     }
 
     checkbox.addEventListener('change', function() {
-        const currentListItem = this.parentNode;
+        const currentListItem = this.closest('li');
         const currentTaskSpan = currentListItem.querySelector('.task-text');
-        if (currentTaskSpan){
+        if (currentTaskSpan) {
             currentTaskSpan.classList.toggle('completed');
         }
         saveTasks();
@@ -82,13 +93,13 @@ function addTaskToDOM(text, completed) {
             const newSpan = document.createElement('span');
             newSpan.classList.add('task-text');
             newSpan.textContent = saveInputField.value;
-            const checkboxElement = saveListItem.querySelector('.task-checkbox');
+            const checkboxLabelElement = saveListItem.querySelector('.checkbox-label-container'); // Get the label element
 
             if (saveInputField) {
-                saveListItem.insertBefore(newSpan, checkboxElement.nextSibling);
+                saveListItem.insertBefore(newSpan, checkboxLabelElement.nextSibling); // Insert newSpan after the label
                 saveListItem.removeChild(saveInputField);
-                saveListItem.replaceChild(editButton, saveEditButton);
-                saveTasks();
+                saveListItem.replaceChild(editButton, this); // Use 'this' to refer to the clicked save button
+                saveTasks(); // Ensure tasks are saved after editing
             }
         });
 
@@ -103,7 +114,7 @@ function addTaskToDOM(text, completed) {
         currentListItem.insertBefore(inputField, saveEditButton);
     });
 
-    listItem.appendChild(checkbox);
+    listItem.appendChild(checkboxLabel);
     listItem.appendChild(taskSpan);
     listItem.appendChild(deleteButton);
     listItem.appendChild(editButton);
