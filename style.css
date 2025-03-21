@@ -100,3 +100,23 @@ h1{
 .edit-btn:hover, .save-edit-btn:hover {
     background-color: #008000; /* Darker green */
 }
+
+#taskList li:hover {
+    background-color: #f9f9f9; /* Light grey on hover */
+    cursor: pointer; /* Change cursor to indicate it's interactive */
+}
+
+.delete-btn:hover {
+    background-color: #c9302c; /* Darker red */
+    opacity: 0.9; /* Slightly fade on hover */
+}
+
+.edit-btn:hover {
+    background-color: #eea236; /* Darker orange */
+    opacity: 0.9;
+}
+
+.save-edit-btn:hover {
+    background-color: #46b8da; /* Darker blue */
+    opacity: 0.9;
+}
