@@ -1,7 +1,9 @@
+let taskIdCounter = Date.now();
 // Get references to the HTML elements we need
 const taskInput = document.getElementById('newTask');
 const addTaskButton = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
+const clearCompletedButton = document.getElementById('clearCompletedBtn');
 
 // Function to save tasks to local storage
 function saveTasks() {
@@ -34,7 +36,7 @@ function addTaskToDOM(text, completed) {
     checkbox.type = 'checkbox';
     checkbox.classList.add('task-checkbox');
     checkbox.checked = completed;
-    checkbox.id = `task-${Date.now()}`;
+    checkbox.id = `task-${taskIdCounter++}`;
 
     const customCheckboxSpan = document.createElement('span');
     customCheckboxSpan.classList.add('custom-checkbox');
@@ -140,6 +142,39 @@ taskInput.addEventListener('keypress', function(event){
         addTask();
     }
 });
+
+clearCompletedButton.addEventListener('click', function(){
+    const completedTasks = taskList.querySelectorAll('li');
+    const completedToRemove = [];
+
+    completedTasks.forEach(listItem => {
+        const checkbox = listItem.querySelector('.task-checkbox');
+        if (checkbox && checkbox.checked){
+            completedToRemove.push(listItem);
+        }
+    });
+
+    if (completedToRemove.length > 0) {
+        if (confirm("Are you sure you want to clear all completed tasks?")) {
+            completedToRemove.forEach(listItem => {
+                listItem.remove();
+            });
+            updateLocalStorage();
+        }
+    } else {
+        alert("No completed tasks to clear!");
+    }
+});
+
+function updateLocalStorage() {
+    const tasks = [];
+    taskList.querySelectorAll('li').forEach(taskItem => {
+        const taskSpan = taskItem.querySelector('.task-text');
+        const isCompleted = taskItem.querySelector('.task-checkbox').checked;
+        tasks.push({ text: taskSpan.textContent, completed: isCompleted });
+    });
+    localStorage.setItem('tasks', JSON.stringify(tasks));
+}
 
 // Load tasks when the page loads
 loadTasks();
