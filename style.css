@@ -1,7 +1,8 @@
 body{
-    font-family: sans-seriff;
+    font-family: Verdana, sans-seriff;
     margin: 20px;
-    background-color: #f4f4f4;
+    background-color: #dedbdb;
+    color: #333;
 }
 
 .container{
@@ -11,6 +12,8 @@ body{
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    font-family: Verdana, sans-seriff;
+    color: #333;
 }
 
 h1{
