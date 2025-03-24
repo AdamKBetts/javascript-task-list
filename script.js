@@ -65,7 +65,7 @@ function addTaskToDOM(text, completed) {
     });
 
     const deleteButton = document.createElement('button');
-    deleteButton.textContent = 'Delete';
+    deleteButton.textContent = '🗑️';
     deleteButton.classList.add('delete-btn');
     deleteButton.addEventListener('click', function() {
         listItem.remove();
@@ -74,14 +74,14 @@ function addTaskToDOM(text, completed) {
 
     // Create an edit button
     const editButton = document.createElement('button');
-    editButton.textContent = 'Edit';
+    editButton.textContent = '✏️';
     editButton.classList.add('edit-btn');
 
     const saveEditButton = document.createElement('button');
     saveEditButton.textContent = 'Save';
     saveEditButton.classList.add('save-edit-btn');
 
-    editButton.addEventListener('click', function() {
+    editButton.addEventListener('click', function(){
         const currentListItem = this.parentNode;
         const currentTaskSpan = currentListItem.querySelector('.task-text');
         const currentText = currentTaskSpan.textContent;
@@ -89,19 +89,34 @@ function addTaskToDOM(text, completed) {
         inputField.type = 'text';
         inputField.value = currentText;
 
+        const checkbox = currentListItem.querySelector('.task-checkbox');
+        const isCurrentlyCompleted = checkbox.checked;
+
+        const saveEditButton = document.createElement('button');
+        saveEditButton.textContent = 'Save';
+        saveEditButton.classList.add('save-edit-btn');
+
         saveEditButton.addEventListener('click', function() {
-            const saveListItem = this.parentNode;
-            const saveInputField = saveListItem.querySelector('input[type="text"]');
+            const saveInputField = currentListItem.querySelector('input[type=text]');
             const newSpan = document.createElement('span');
             newSpan.classList.add('task-text');
             newSpan.textContent = saveInputField.value;
-            const checkboxLabelElement = saveListItem.querySelector('.checkbox-label-container'); // Get the label element
+            const checkboxLabelElement = currentListItem.querySelector('.checkbox-label-container');
 
             if (saveInputField) {
-                saveListItem.insertBefore(newSpan, checkboxLabelElement.nextSibling); // Insert newSpan after the label
-                saveListItem.removeChild(saveInputField);
-                saveListItem.replaceChild(editButton, this); // Use 'this' to refer to the clicked save button
-                saveTasks(); // Ensure tasks are saved after editing
+                currentListItem.insertBefore(newSpan, checkboxLabelElement.nextSibling);
+                currentListItem.removeChild(saveInputField);
+                currentListItem.replaceChild(editButton, this);
+                saveTasks();
+
+                const checkbox = currentListItem.querySelector('.task-checkbox');
+                const taskSpan = currentListItem.querySelector('.task-text');
+                checkbox.checked = isCurrentlyCompleted;
+                if (isCurrentlyCompleted) {
+                    taskSpan.classList.add('completed');
+                } else {
+                    taskSpan.classList.remove('completed');
+                }
             }
         });
 
