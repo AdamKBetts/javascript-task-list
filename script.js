@@ -4,6 +4,9 @@ const taskInput = document.getElementById('newTask');
 const addTaskButton = document.getElementById('addTaskBtn');
 const taskList = document.getElementById('taskList');
 const clearCompletedButton = document.getElementById('clearCompletedBtn');
+const showAllButton = document.getElementById('showAllBtn');
+const showActiveButton = document.getElementById('showActiveBtn');
+const showCompletedButton = document.getElementById('showCompletedBtn');
 
 // Function to save tasks to local storage
 function saveTasks() {
@@ -200,5 +203,29 @@ function updateLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
 
+showAllButton.addEventListener ('click', () => filterTasks('all'));
+showActiveButton.addEventListener('click', () => filterTasks('active'));
+showCompletedButton.addEventListener('click', () => filterTasks('completed'));
+
+function filterTasks(filterType) {
+    const taskListItems = taskList.querySelectorAll('li');
+    taskListItems.forEach(item => {
+        const isCompleted = item.querySelector('.task-checkbox').checked;
+        switch (filterType) {
+            case 'active':
+                item.style.display = isCompleted ? 'none' : 'flex';
+                break;
+            case 'completed':
+                item.style.display = isCompleted ? 'flex' : 'none';
+                break;
+            case 'all':
+            default:
+                item.style.display = 'flex';
+                break;
+        }
+    });
+}
+
 // Load tasks when the page loads
 loadTasks();
+filterTasks('all');

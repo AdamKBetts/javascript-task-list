@@ -212,3 +212,23 @@ h1{
 .task-checkbox:focus + .custom-checkbox {
     border-color: #007bff;
 }
+
+.filter-buttons {
+    margin-bottom: 15px;
+    display: flex;
+    gap: 10px;
+    justify-content: center;
+}
+
+.filter-buttons button {
+    padding: 8px 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    background-color: #f8f8f8;
+    cursor: poiner;
+    font-size: 14px;
+}
+
+.filter-buttons button:hover {
+    background-color: #eee;
+}
