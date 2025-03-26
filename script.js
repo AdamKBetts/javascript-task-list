@@ -8,6 +8,7 @@ const showAllButton = document.getElementById('showAllBtn');
 const showActiveButton = document.getElementById('showActiveBtn');
 const showCompletedButton = document.getElementById('showCompletedBtn');
 const selectAllCheckbox = document.getElementById('selectAllCheckbox');
+const clearAllButton = document.getElementById('clearAllBtn');
 
 // Function to save tasks to local storage
 function saveTasks() {
@@ -216,6 +217,7 @@ showAllButton.addEventListener ('click', () => filterTasks('all'));
 showActiveButton.addEventListener('click', () => filterTasks('active'));
 showCompletedButton.addEventListener('click', () => filterTasks('completed'));
 selectAllCheckbox.addEventListener('change', toggleAllTasks);
+clearAllButton.addEventListener('click', clearAllTasks);
 
 function filterTasks(filterType) {
     const taskListItems = taskList.querySelectorAll('li');
@@ -269,6 +271,17 @@ function updateSelectAllCheckboxState() {
     const allTaskCheckboxes = taskList.querySelectorAll('.task-checkbox');
     const allCompleted = Array.from(allTaskCheckboxes).every(checkbox => checkbox.checked);
     selectAllCheckbox.checked = allCompleted;
+}
+
+function clearAllTasks() {
+    if (confirm("Are you sure you want to clear all tasks? This action cannot be undone.")) {
+        taskList.innerHTML = '';
+        localStorage.removeItem('tasks');
+        updateActiveTaskCount();
+        if (selectAllCheckbox) {
+            selectAllCheckbox.checked = false;
+        }
+    }
 }
 
 // Load tasks when the page loads
