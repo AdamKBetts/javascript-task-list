@@ -64,6 +64,13 @@ function addTaskToDOM(text, completed) {
         saveTasks();
     });
 
+    checkbox.addEventListener('keypress', function(event) {
+        if (event.key === 'Enter') {
+            this.checked = !this.checked;
+            this.dispatchEvent(new Event('change'));
+        }
+    });
+
     const deleteButton = document.createElement('button');
     deleteButton.textContent = '🗑️';
     deleteButton.classList.add('delete-btn');
@@ -146,6 +153,7 @@ function addTask() {
         addTaskToDOM(taskText, false);
         taskInput.value = '';
         saveTasks();
+        taskInput.focus();
     }
 }
 
