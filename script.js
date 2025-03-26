@@ -29,6 +29,7 @@ function loadTasks() {
             addTaskToDOM(task.text, task.completed);
         });
     }
+    updateActiveTaskCount();
 }
 
 // Function to add a task to the DOM (used by loadTasks)
@@ -65,6 +66,7 @@ function addTaskToDOM(text, completed) {
             currentTaskSpan.classList.toggle('completed');
         }
         saveTasks();
+        updateActiveTaskCount();
     });
 
     checkbox.addEventListener('keypress', function(event) {
@@ -80,6 +82,7 @@ function addTaskToDOM(text, completed) {
     deleteButton.addEventListener('click', function() {
         listItem.remove();
         saveTasks();
+        updateActiveTaskCount();
     });
 
     // Create an edit button
@@ -147,6 +150,7 @@ function addTaskToDOM(text, completed) {
     listItem.appendChild(deleteButton);
     listItem.appendChild(editButton);
     taskList.appendChild(listItem);
+    updateActiveTaskCount();
 }
 
 // Function to add a new task to the lsit
@@ -201,6 +205,7 @@ function updateLocalStorage() {
         tasks.push({ text: taskSpan.textContent, completed: isCompleted });
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
+    updateActiveTaskCount();
 }
 
 showAllButton.addEventListener ('click', () => filterTasks('all'));
@@ -224,6 +229,18 @@ function filterTasks(filterType) {
                 break;
         }
     });
+}
+
+function updateActiveTaskCount() {
+    const activeCountSpan = document.getElementById('activeTaskCount');
+    const checkboxes = taskList.querySelectorAll('.task-checkbox');
+    let activeTaskCount = 0;
+    checkboxes.forEach(checkbox => {
+        if (!checkbox.checked) {
+            activeTaskCount++;
+        }
+    });
+    activeCountSpan.textContent = `Active tasks: ${activeTaskCount}`;
 }
 
 // Load tasks when the page loads
