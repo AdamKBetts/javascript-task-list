@@ -244,3 +244,15 @@ h1{
 .select-all input[type="checkbox"] {
     margin-right: 8px;
 }
+
+.low-priority {
+    border-left: 5px solid green;
+}
+
+.medium-priority {
+    border-left: 5px solid orange;
+}
+
+.high-priority {
+    border-left: 5px solid red;
+}

@@ -17,7 +17,8 @@ function saveTasks() {
         const taskSpan = taskItem.querySelector('.task-text');
         const taskText = taskSpan ? taskSpan.textContent : taskItem.querySelector('input[type="text"]').value; // Handle edit mode
         const isCompleted = taskItem.querySelector('.task-checkbox').checked;
-        tasks.push({ text: taskText, completed: isCompleted });
+        const priority = taskItem.className.split(' ')[0].replace('-priority', '');
+        tasks.push({ text: taskText, completed: isCompleted, priority: priority });
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
 }
@@ -28,7 +29,7 @@ function loadTasks() {
     if (storedTasks) {
         const tasks = JSON.parse(storedTasks);
         tasks.forEach(task => {
-            addTaskToDOM(task.text, task.completed);
+            addTaskToDOM(task.text, task.completed, task.priority);
         });
     }
     updateActiveTaskCount();
@@ -36,8 +37,9 @@ function loadTasks() {
 }
 
 // Function to add a task to the DOM (used by loadTasks)
-function addTaskToDOM(text, completed) {
+function addTaskToDOM(text, completed, priority = 'medium') {
     const listItem = document.createElement('li');
+    listItem.classList.add(priority + '-priority');
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -161,8 +163,9 @@ function addTaskToDOM(text, completed) {
 // Function to add a new task to the lsit
 function addTask() {
     const taskText = taskInput.value.trim();
+    const taskPriority = document.getElementById('taskPriority').value;
     if (taskText !== '') {
-        addTaskToDOM(taskText, false);
+        addTaskToDOM(taskText, false, taskPriority);
         taskInput.value = '';
         saveTasks();
         taskInput.focus();
