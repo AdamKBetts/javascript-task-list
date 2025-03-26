@@ -88,6 +88,7 @@ function addTaskToDOM(text, completed) {
         const inputField = document.createElement('input');
         inputField.type = 'text';
         inputField.value = currentText;
+        inputField.classList.add('edit-input');
 
         const checkbox = currentListItem.querySelector('.task-checkbox');
         const isCurrentlyCompleted = checkbox.checked;
