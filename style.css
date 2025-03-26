@@ -232,3 +232,14 @@ h1{
 .filter-buttons button:hover {
     background-color: #eee;
 }
+
+.select-all {
+    display: flex;
+    align-items: center;
+    margin-bottom: 10px;
+    justify-content: center;
+}
+
+.select-all input[type="checkbox"] {
+    margin-right: 8px;
+}

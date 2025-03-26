@@ -7,6 +7,7 @@ const clearCompletedButton = document.getElementById('clearCompletedBtn');
 const showAllButton = document.getElementById('showAllBtn');
 const showActiveButton = document.getElementById('showActiveBtn');
 const showCompletedButton = document.getElementById('showCompletedBtn');
+const selectAllCheckbox = document.getElementById('selectAllCheckbox');
 
 // Function to save tasks to local storage
 function saveTasks() {
@@ -30,6 +31,7 @@ function loadTasks() {
         });
     }
     updateActiveTaskCount();
+    updateSelectAllCheckboxState();
 }
 
 // Function to add a task to the DOM (used by loadTasks)
@@ -67,6 +69,7 @@ function addTaskToDOM(text, completed) {
         }
         saveTasks();
         updateActiveTaskCount();
+        updateSelectAllCheckboxState();
     });
 
     checkbox.addEventListener('keypress', function(event) {
@@ -151,6 +154,7 @@ function addTaskToDOM(text, completed) {
     listItem.appendChild(editButton);
     taskList.appendChild(listItem);
     updateActiveTaskCount();
+    updateSelectAllCheckboxState();
 }
 
 // Function to add a new task to the lsit
@@ -211,6 +215,7 @@ function updateLocalStorage() {
 showAllButton.addEventListener ('click', () => filterTasks('all'));
 showActiveButton.addEventListener('click', () => filterTasks('active'));
 showCompletedButton.addEventListener('click', () => filterTasks('completed'));
+selectAllCheckbox.addEventListener('change', toggleAllTasks);
 
 function filterTasks(filterType) {
     const taskListItems = taskList.querySelectorAll('li');
@@ -241,6 +246,29 @@ function updateActiveTaskCount() {
         }
     });
     activeCountSpan.textContent = `Active tasks: ${activeTaskCount}`;
+}
+
+function toggleAllTasks() {
+    const allTaskCheckboxes = taskList.querySelectorAll('.task-checkbox');
+    const isChecked = selectAllCheckbox.checked;
+
+    allTaskCheckboxes.forEach(checkbox => {
+        checkbox.checked = isChecked;
+        const listItem = checkbox.closest('li');
+        const taskSpan = listItem.querySelector('.task-text');
+        if (taskSpan) {
+            taskSpan.classList.toggle('completed', isChecked);
+        }
+    });
+
+    saveTasks();
+    updateActiveTaskCount();
+}
+
+function updateSelectAllCheckboxState() {
+    const allTaskCheckboxes = taskList.querySelectorAll('.task-checkbox');
+    const allCompleted = Array.from(allTaskCheckboxes).every(checkbox => checkbox.checked);
+    selectAllCheckbox.checked = allCompleted;
 }
 
 // Load tasks when the page loads
