@@ -34,6 +34,7 @@ function loadTasks() {
     }
     updateActiveTaskCount();
     updateSelectAllCheckboxState();
+    toggleEmptyTaskListMessage();
 }
 
 // Function to add a task to the DOM (used by loadTasks)
@@ -89,6 +90,7 @@ function addTaskToDOM(text, completed, priority = 'medium') {
         listItem.remove();
         saveTasks();
         updateActiveTaskCount();
+        toggleEmptyTaskListMessage();
     });
 
     // Create an edit button
@@ -158,6 +160,7 @@ function addTaskToDOM(text, completed, priority = 'medium') {
     taskList.appendChild(listItem);
     updateActiveTaskCount();
     updateSelectAllCheckboxState();
+    toggleEmptyTaskListMessage();
 }
 
 // Function to add a new task to the lsit
@@ -214,6 +217,7 @@ function updateLocalStorage() {
     });
     localStorage.setItem('tasks', JSON.stringify(tasks));
     updateActiveTaskCount();
+    toggleEmptyTaskListMessage();
 }
 
 showAllButton.addEventListener ('click', () => filterTasks('all'));
@@ -276,6 +280,16 @@ function updateSelectAllCheckboxState() {
     selectAllCheckbox.checked = allCompleted;
 }
 
+function toggleEmptyTaskListMessage() {
+    const emptyMessage = document.getElementById('emptyTaskListMessage');
+    const taskListItems = taskList.querySelectorAll('li');
+    if (taskListItems.length === 0) {
+        emptyMessage.style.display = 'block';
+    } else {
+        emptyMessage.style.display = 'none';
+    }
+}
+
 function clearAllTasks() {
     if (confirm("Are you sure you want to clear all tasks? This action cannot be undone.")) {
         taskList.innerHTML = '';
@@ -284,6 +298,7 @@ function clearAllTasks() {
         if (selectAllCheckbox) {
             selectAllCheckbox.checked = false;
         }
+        toggleEmptyTaskListMessage();
     }
 }
 
