@@ -40,7 +40,7 @@ function loadTasks() {
 // Function to add a task to the DOM (used by loadTasks)
 function addTaskToDOM(text, completed, priority = 'medium') {
     const listItem = document.createElement('li');
-    listItem.classList.add(priority + '-priority');
+    listItem.classList.add(priority + '-priority', 'fade-in');
 
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
@@ -87,10 +87,15 @@ function addTaskToDOM(text, completed, priority = 'medium') {
     deleteButton.textContent = '🗑️';
     deleteButton.classList.add('delete-btn');
     deleteButton.addEventListener('click', function() {
-        listItem.remove();
-        saveTasks();
-        updateActiveTaskCount();
-        toggleEmptyTaskListMessage();
+        const listItemToRemove = this.closest('li');
+        listItemToRemove.classList.add('fade-out');
+
+        setTimeout(() => {
+            listItem.remove();
+            saveTasks();
+            updateActiveTaskCount();
+            toggleEmptyTaskListMessage();
+        }, 300);
     });
 
     // Create an edit button
@@ -158,6 +163,9 @@ function addTaskToDOM(text, completed, priority = 'medium') {
     listItem.appendChild(deleteButton);
     listItem.appendChild(editButton);
     taskList.appendChild(listItem);
+    setTimeout(() => {
+        listItem.classList.add('loaded');
+    }, 10);
     updateActiveTaskCount();
     updateSelectAllCheckboxState();
     toggleEmptyTaskListMessage();
