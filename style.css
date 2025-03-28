@@ -87,6 +87,11 @@ h1{
     border-bottom: none;
 }
 
+#taskList:hover {
+    background-color: #f9f9f9;
+    cursor: grab;
+}
+
 .task-text{
     flex-grow: 1;
 }
@@ -135,18 +140,21 @@ h1{
 }
 
 .delete-btn:hover {
-    background-color: #c9302c; /* Darker red */
+    background-color: #ffdddd; /* Darker red */
     opacity: 0.9; /* Slightly fade on hover */
+    cursor: pointer;
 }
 
 .edit-btn:hover {
-    background-color: #eea236; /* Darker orange */
+    background-color: #ddffdd; /* Darker orange */
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .save-edit-btn:hover {
-    background-color: #46b8da; /* Darker blue */
+    background-color: #ddffdd; /* Darker blue */
     opacity: 0.9;
+    cursor: pointer;
 }
 
 .checkbox-label-container {
@@ -273,4 +281,11 @@ h1{
 
 .high-priority {
     border-left: 5px solid red;
+}
+
+.input-section button:hover,
+.filter-buttons button:hover,
+.select-all label:hover {
+    background-color: #e0e0e0;
+    cursor: pointer;
 }
