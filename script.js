@@ -42,6 +42,7 @@ function loadTasks() {
     updateActiveTaskCount();
     updateSelectAllCheckboxState();
     toggleEmptyTaskListMessage();
+    updateClearCompletedButtonState();
 }
 
 // Function to add a task to the DOM (used by loadTasks)
@@ -81,6 +82,7 @@ function addTaskToDOM(text, completed, priority = 'medium') {
         saveTasks();
         updateActiveTaskCount();
         updateSelectAllCheckboxState();
+        updateClearCompletedButtonState();
     });
 
     checkbox.addEventListener('keypress', function(event) {
@@ -102,6 +104,7 @@ function addTaskToDOM(text, completed, priority = 'medium') {
             saveTasks();
             updateActiveTaskCount();
             toggleEmptyTaskListMessage();
+            updateClearCompletedButtonState();
         }, 300);
     });
 
@@ -233,6 +236,7 @@ function updateLocalStorage() {
     localStorage.setItem('tasks', JSON.stringify(tasks));
     updateActiveTaskCount();
     toggleEmptyTaskListMessage();
+    updateClearCompletedButtonState();
 }
 
 showAllButton.addEventListener ('click', () => filterTasks('all'));
@@ -270,6 +274,14 @@ function updateActiveTaskCount() {
         }
     });
     activeCountSpan.textContent = `Active tasks: ${activeTaskCount}`;
+}
+
+function updateClearCompletedButtonState() {
+    const clearCompletedButton = document.getElementById('clearCompletedBtn');
+    if (clearCompletedButton) {
+        const hasCompleted = hasCompletedTasks();
+        clearCompletedButton.disabled = !hasCompleted;
+    }
 }
 
 function toggleAllTasks() {
@@ -314,7 +326,13 @@ function clearAllTasks() {
             selectAllCheckbox.checked = false;
         }
         toggleEmptyTaskListMessage();
+        updateClearCompletedButtonState();
     }
+}
+
+function hasCompletedTasks() {
+    const completedTasks = taskList.querySelectorAll('li .task-checkbox:checked');
+    return completedTasks.length > 0;
 }
 
 // Load tasks when the page loads
