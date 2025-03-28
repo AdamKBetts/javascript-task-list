@@ -185,7 +185,23 @@ function addTaskToDOM(text, completed, priority = 'medium') {
 function addTask() {
     const taskText = taskInput.value.trim();
     const taskPriority = document.getElementById('taskPriority').value;
+
     if (taskText !== '') {
+        // Check for duplicate tasks
+        const existingTasks = taskList.querySelectorAll('li .task-text');
+        let isDuplicate = false;
+        const newTaskTextLower = taskText.toLowerCase();
+        existingTasks.forEach(existingTask => {
+            if (existingTask.textContent.trim().toLowerCase() === newTaskTextLower) {
+                isDuplicate = true;
+            }
+        });
+
+        if (isDuplicate) {
+            alert("this task is already in your list!");
+            return;
+        }
+
         addTaskToDOM(taskText, false, taskPriority);
         taskInput.value = '';
         saveTasks();
