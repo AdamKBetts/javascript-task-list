@@ -9,7 +9,14 @@ const showActiveButton = document.getElementById('showActiveBtn');
 const showCompletedButton = document.getElementById('showCompletedBtn');
 const selectAllCheckbox = document.getElementById('selectAllCheckbox');
 const clearAllButton = document.getElementById('clearAllBtn');
+const clearInputButton = document.getElementById('clearInputBtn');
 
+if (clearInputButton) {
+    clearInputButton.addEventListener('click', function() {
+        taskInput.value = '';
+        taskInput.focus();
+    });
+}
 // Function to save tasks to local storage
 function saveTasks() {
     const tasks = [];
