@@ -1,42 +1,39 @@
 :root {
-    --body-bg-color: #dedbdb;
-    --container-bg-color: #fff;
-    --primary-text-color: #333;
-    --primary-blue: #007bff;
-    --primary-blue-darker: #0056b3;
-    --danger-color: #dc3545;
-    --danger-color-darker: #c82333;
-    --success-color: #00c853;
-    --success-color-darker: #008000;
-    --secondary-color: #6c757d;
-    --secondary-color-darker: #5a6268;
-    --light-grey: #eee;
-    --lighter-grey: #f9f9f9;
-    --very-light-grey: #f0f0f0;
-    --focus-color: #007bff;
-    --completed-text-color: #777;
-    --border-color: #aaa;
-    --checkbox-border-color: #ccc;
-    --checkbox-checked-color: #2196F3;
-    --checkbox-tick-color: white;
+    --body-bg-color: #1e272e; /* Dark background */
+    --container-bg-color: #2c3a47; /* Darker container */
+    --primary-text-color: #f8f9fa; /* Light text */
+    --secondary-text-color: #adb5bd; /* Slightly darker light text */
+    --accent-color: #00b894; /* Teal/Cyan accent */
+    --accent-color-darker: #008a6c;
+    --danger-color: #e84118; /* Red/Orange for delete */
+    --danger-color-darker: #b83214;
+    --success-color: #4cd137; /* Green for save/edit */
+    --success-color-darker: #3aa32e;
+    --light-grey: #4b6584; /* Lighter shade for borders/dividers */
+    --lighter-grey: #34495e;
+    --focus-color: var(--accent-color);
+    --completed-text-color: #6c757d;
+    --border-color: var(--light-grey);
+    --checkbox-border-color: #636e72;
+    --checkbox-checked-color: var(--accent-color);
+    --checkbox-tick-color: var(--container-bg-color);
 }
 
 /* --- Base Styles --- */
-
 body{
-    font-family: Verdana, sans-seriff;
-    margin: 20px;
+    font-family: 'Roboto', sans-seriff;
+    margin: 30px;
     background-color: var(--body-bg-color);
     color: var(--primary-text-color);
 }
 
 .container{
     max-width: 600px;
-    margin: 0 auto;
+    margin: 30px auto;
     background-color: var(--container-bg-color);
-    padding: 20px;
-    border-radius: 8px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
     color: var(--primary-text-color);
 }
 
@@ -63,9 +60,9 @@ h1{
 
 .btn {
     padding: 10px 20px;
-    color: white;
+    color: var(--primary-text-color);
     border: none;
-    border-radius: 4px;
+    border-radius: 6px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
@@ -73,26 +70,27 @@ h1{
 
 #addTaskBtn{
     @extend .btn;
-    background-color: var(--primary-blue);
-    border-radius: 0 4px 4px 0;
+    background-color: var(--accent-color);
 }
 
 #addTaskBtn:hover{
-    background-color: var(--primary-blue-darker);
+    background-color: var(--accent-color-darker);
 }
 
 #clearInputBtn {
-    padding: 5px 10px;
-    margin-left: 5px;
-    border: none;
-    background-color: var(--very-light-grey);
+    padding: 8px 15px;
+    margin-left: 10px;
+    border: 1px solid var(--light-grey);
+    background-color: transparent;
+    color: var(--secondary-text-color);
     cursor: pointer;
-    font-size: 0.8em;
-    border-radius: 5px;
+    font-size: 0.9em;
+    border-radius: 6px;
 }
 
 #clearInputBtn:hover {
-    background-color: #e0e0e0;
+    background-color: var(--lighter-grey);
+    color: var(--primary-text-color)
 }
 
 /* --- Task List --- */
@@ -128,12 +126,12 @@ h1{
     border-bottom: none;
 }
 
-/*
+
 #taskList:hover {
-    background-color: #f9f9f9;
-    cursor: grab;
+    background-color: var(--lighter-grey);
+    cursor: pointer;
 }
-*/
+
 
 .task-text{
     flex-grow: 1;
@@ -147,8 +145,8 @@ h1{
 
 .action-buttons button {
     @extend .btn;
-    padding: 3px 8px;
-    font-size: 0.8em;
+    padding: 8px 12px;
+    font-size: 0.9em;
     line-height: 1;
     margin-left: 5px;
 }
@@ -187,13 +185,14 @@ h1{
 .custom-checkbox{
     position: relative;
     display: inline-block;
-    width: 20px;
-    height: 20px;
+    width: 22px;
+    height: 22px;
     border: 2px solid var(--checkbox-border-color);
-    border-radius: 4px;
-    margin-right: 0;
+    border-radius: 6px;
+    margin-right: 8px;
     cursor: pointer;
     pointer-events: none;
+    background-color: transparent;
 }
 
 .task-checkbox:checked + .custom-checkbox {
@@ -204,10 +203,10 @@ h1{
 .task-checkbox:checked + .custom-checkbox::after {
     content: "";
     position: absolute;
-    left: 6px;
-    top: 2px;
-    width: 5px;
-    height: 10px;
+    left: 7px;
+    top: 3px;
+    width: 6px;
+    height: 12px;
     border: solid var(--checkbox-tick-color);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
@@ -219,10 +218,22 @@ h1{
     padding: 10px 15px;
     background-color: var(--secondary-color);
     margin-left: 10px;
+    color: var(--secondary-text-color);
 }
 
 #clearCompletedBtn:hover {
     background-color: var(--secondary-color-darker);
+}
+
+/* --- Clear All Tasks --- */
+#clearAllBtn {
+    @extend .btn;
+    background-color: #f0ad4e;
+    color: white;
+}
+
+#clearAllBtn {
+    background-color: #d9534f;
 }
 
 /* --- Edit Input --- */
@@ -233,6 +244,36 @@ h1{
     border-radius: 4px;
     font-size: 16px;
     background-color: #f0f8ff;
+}
+
+/* --- Priority Dropdown --- */
+#taskPriority {
+    padding: 10px;
+    border: 1px solid var(--border-color);
+    border-radius: 4px;
+    font-size: 16px;
+    background-color: var(--container-bg-color);
+    color: var(--primary-text-color);
+    cursor: pointer;
+    transition: border-color 0.3s ease;
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    background-image: url('data:image/svg+xml;utf8,<svg fill="%23f8f9fa" height="24" viewBox="0 0 24 24" width="24" xmlns="http://www.w3.org/2000/svg"><path d="M7 10l5 5 5-5z"/><path d="M0 0h24v24H0z" fill="none"/></svg>');
+    background-repeat: no-repeat;
+    background-position-x: calc(100% - 10px);
+    background-position-y: 50%;
+    padding-right: 30px;
+}
+
+#taskPriority:focus {
+    outline: none;
+    border-color: var(--focus-color);
+}
+
+#taskPriority option {
+    background-color: var(--container-bg-color);
+    color: var(--primary-text-color);
 }
 
 /* --- Focus Styles --- */
@@ -262,6 +303,7 @@ input:focus, button:focus, .filter-buttons button:focus,
     cursor: poiner;
     font-size: 14px;
     transition: background-color 0.3s ease;
+    color: var(--primary-text-color);
 }
 
 .filter-buttons button:hover {
