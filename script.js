@@ -77,11 +77,11 @@ function createTaskListItem(text, completed, priority) {
 
     const deleteButton = document.createElement('button');
     deleteButton.textContent = '🗑️';
-    deleteButton.classList.add('delete-btn');
+    deleteButton.classList.add('delete-btn', 'btn');
 
     const editButton = document.createElement('button');
     editButton.textContent = '✏️';
-    editButton.classList.add('edit-btn');
+    editButton.classList.add('edit-btn', 'btn');
 
     listItem.appendChild(checkboxLabel);
     listItem.appendChild(taskSpan);
@@ -296,7 +296,7 @@ function handleEditTask() {
 
     const saveEditButton = document.createElement('button');
     saveEditButton.textContent = 'Save';
-    saveEditButton.classList.add('save-edit-btn');
+    saveEditButton.classList.add('save-edit-btn', 'btn');
 
     saveEditButton.addEventListener('click', () => {
         const saveInputField = currentListItem.querySelector('input[type=text]');

@@ -69,7 +69,6 @@ h1{
 }
 
 #addTaskBtn{
-    @extend .btn;
     background-color: var(--accent-color);
 }
 
@@ -143,8 +142,9 @@ h1{
     opacity: 0.6;
 }
 
-.action-buttons button {
-    @extend .btn;
+#taskList li button.delete-btn,
+#taskList li button.edit-btn,
+#taskList li button.save-edit-btn {
     padding: 8px 12px;
     font-size: 0.9em;
     line-height: 1;
@@ -214,7 +214,6 @@ h1{
 
 /* --- Clear Completed Button --- */
 #clearCompletedBtn {
-    @extend .btn;
     padding: 10px 15px;
     background-color: var(--secondary-color);
     margin-left: 10px;
@@ -227,7 +226,6 @@ h1{
 
 /* --- Clear All Tasks --- */
 #clearAllBtn {
-    @extend .btn;
     background-color: #f0ad4e;
     color: white;
 }
