@@ -1,19 +1,43 @@
+:root {
+    --body-bg-color: #dedbdb;
+    --container-bg-color: #fff;
+    --primary-text-color: #333;
+    --primary-blue: #007bff;
+    --primary-blue-darker: #0056b3;
+    --danger-color: #dc3545;
+    --danger-color-darker: #c82333;
+    --success-color: #00c853;
+    --success-color-darker: #008000;
+    --secondary-color: #6c757d;
+    --secondary-color-darker: #5a6268;
+    --light-grey: #eee;
+    --lighter-grey: #f9f9f9;
+    --very-light-grey: #f0f0f0;
+    --focus-color: #007bff;
+    --completed-text-color: #777;
+    --border-color: #aaa;
+    --checkbox-border-color: #ccc;
+    --checkbox-checked-color: #2196F3;
+    --checkbox-tick-color: white;
+}
+
+/* --- Base Styles --- */
+
 body{
     font-family: Verdana, sans-seriff;
     margin: 20px;
-    background-color: #dedbdb;
-    color: #333;
+    background-color: var(--body-bg-color);
+    color: var(--primary-text-color);
 }
 
 .container{
     max-width: 600px;
     margin: 0 auto;
-    background-color: #fff;
+    background-color: var(--container-bg-color);
     padding: 20px;
     border-radius: 8px;
     box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    font-family: Verdana, sans-serif;
-    color: #333;
+    color: var(--primary-text-color);
 }
 
 h1{
@@ -21,6 +45,7 @@ h1{
     margin-bottom: 20px;
 }
 
+/* --- Input Section --- */
 .input-section{
     display: flex;
     margin-bottom: 20px;
@@ -31,26 +56,46 @@ h1{
 #newTask{
     flex-grow: 1;
     padding: 10px;
-    border: 1px solid #aaa;
+    border: 1px solid var(--border-color);
     border-radius: 4px 0 0 4px;
     font-size: 16px;
 }
 
-#addTaskBtn{
+.btn {
     padding: 10px 20px;
-    background-color: #007bff;
     color: white;
     border: none;
-    border-radius: 0 4px 4px 0;
+    border-radius: 4px;
     cursor: pointer;
     font-size: 16px;
     transition: background-color 0.3s ease;
 }
 
-#addTaskBtn:hover{
-    background-color: #0056b3;
+#addTaskBtn{
+    @extend .btn;
+    background-color: var(--primary-blue);
+    border-radius: 0 4px 4px 0;
 }
 
+#addTaskBtn:hover{
+    background-color: var(--primary-blue-darker);
+}
+
+#clearInputBtn {
+    padding: 5px 10px;
+    margin-left: 5px;
+    border: none;
+    background-color: var(--very-light-grey);
+    cursor: pointer;
+    font-size: 0.8em;
+    border-radius: 5px;
+}
+
+#clearInputBtn:hover {
+    background-color: #e0e0e0;
+}
+
+/* --- Task List --- */
 #taskList{
     list-style-type: none;
     padding: 0;
@@ -58,17 +103,13 @@ h1{
 
 #taskList li{
     padding: 10px;
-    border-bottom: 1px solid #eee;
+    border-bottom: 1px solid var(--light-grey);
     display: flex;
     justify-content: space-between;
     align-items: center;
     transition: background-color 0.2s ease-in-out;
     opacity: 1;
     transition: opacity 0.3s ease-in-out;
-}
-
-#taskList li.fade-in {
-    opacity: 0;
 }
 
 #taskList li.fade-in {
@@ -87,76 +128,48 @@ h1{
     border-bottom: none;
 }
 
+/*
 #taskList:hover {
     background-color: #f9f9f9;
     cursor: grab;
 }
+*/
 
 .task-text{
     flex-grow: 1;
 }
 
-.delete-btn{
-    background-color: #dc3545;
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
-    margin-left: 10px;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
-}
-
-.delete-btn:hover {
-    background-color: #c82333;
-}
-
-.task-text.completed{
+.task-text.completed {
     text-decoration: line-through;
-    color: #777;
+    color: var(--completed-text-color);
     opacity: 0.6;
 }
 
-.edit-btn, .save-edit-btn {
-    background-color: #00c853; /* Green color */
-    color: white;
-    border: none;
-    padding: 5px 10px;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 14px;
+.action-buttons button {
+    @extend .btn;
+    padding: 3px 8px;
+    font-size: 0.8em;
+    line-height: 1;
     margin-left: 5px;
-    transition: background-color 0.3s ease, opacity 0.3s ease;
 }
 
-.edit-btn:hover, .save-edit-btn:hover {
-    background-color: #008000; /* Darker green */
-}
-
-#taskList li:hover {
-    background-color: #f9f9f9; /* Light grey on hover */
-    cursor: pointer; /* Change cursor to indicate it's interactive */
+.delete-btn{
+    background-color: var(--danger-color);
 }
 
 .delete-btn:hover {
-    background-color: #ffdddd; /* Darker red */
-    opacity: 0.9; /* Slightly fade on hover */
-    cursor: pointer;
+    background-color: var(--danger-color-darker);
 }
 
-.edit-btn:hover {
-    background-color: #ddffdd; /* Darker orange */
-    opacity: 0.9;
-    cursor: pointer;
+.edit-btn, .save-edit-btn {
+    background-color: var(--success-color);
 }
 
-.save-edit-btn:hover {
-    background-color: #ddffdd; /* Darker blue */
-    opacity: 0.9;
-    cursor: pointer;
+.edit-btn:hover, .save-edit-btn:hover {
+    background-color: var(--success-color-darker);
 }
 
+/* --- Checkbox --- */
 .checkbox-label-container {
     display: inline-flex;
     align-items: center;
@@ -176,7 +189,7 @@ h1{
     display: inline-block;
     width: 20px;
     height: 20px;
-    border: 2px solid #ccc;
+    border: 2px solid var(--checkbox-border-color);
     border-radius: 4px;
     margin-right: 0;
     cursor: pointer;
@@ -184,8 +197,8 @@ h1{
 }
 
 .task-checkbox:checked + .custom-checkbox {
-    background-color: #2196F3;
-    border: 2px solid #2196F3;
+    background-color: var(--checkbox-checked-color);
+    border: 2px solid var(--checkbox-checked-color);
 }
 
 .task-checkbox:checked + .custom-checkbox::after {
@@ -195,51 +208,45 @@ h1{
     top: 2px;
     width: 5px;
     height: 10px;
-    border: solid white;
+    border: solid var(--checkbox-tick-color);
     border-width: 0 3px 3px 0;
     transform: rotate(45deg);
 }
 
+/* --- Clear Completed Button --- */
 #clearCompletedBtn {
+    @extend .btn;
     padding: 10px 15px;
-    background-color: #6c757d;
-    color: white;
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-size: 16px;
+    background-color: var(--secondary-color);
     margin-left: 10px;
-    transition: background-color 0.3s ease;
 }
 
 #clearCompletedBtn:hover {
-    background-color: #5a6268;
+    background-color: var(--secondary-color-darker);
 }
 
-.delete-btn, .edit-btn, .save-edit-btn {
-    padding: 3px 8px;
-    font-size: 16px;
-    line-height: 1;
-}
-
+/* --- Edit Input --- */
 .edit-input {
     padding: 8px;
     margin-bottom: 5px;
-    border: 1px solid #007bff;
+    border: 1px solid var(--primary-blue);
     border-radius: 4px;
     font-size: 16px;
     background-color: #f0f8ff;
 }
 
-.input:focus, button:focus {
-    outline: 2px solid #007bff;
+/* --- Focus Styles --- */
+input:focus, button:focus, .filter-buttons button:focus,
+.select-all input[type="checkbox"]:focus + label {
+    outline: 2px solid var(--focus-color);
     outline-offset: 2px;
 }
 
 .task-checkbox:focus + .custom-checkbox {
-    border-color: #007bff;
+    border-color: var(--focus-color);
 }
 
+/* --- Filter Buttons --- */
 .filter-buttons {
     margin-bottom: 15px;
     display: flex;
@@ -251,15 +258,17 @@ h1{
     padding: 8px 12px;
     border: 1px solid #ccc;
     border-radius: 4px;
-    background-color: #f8f8f8;
+    background-color: var(--lighter-grey);
     cursor: poiner;
     font-size: 14px;
+    transition: background-color 0.3s ease;
 }
 
 .filter-buttons button:hover {
     background-color: #eee;
 }
 
+/* --- Select All Checkbox --- */
 .select-all {
     display: flex;
     align-items: center;
@@ -271,6 +280,11 @@ h1{
     margin-right: 8px;
 }
 
+.select-all label {
+    cursor: pointer;
+}
+
+/* --- Priority Styles --- */
 .low-priority {
     border-left: 5px solid green;
 }
@@ -281,25 +295,4 @@ h1{
 
 .high-priority {
     border-left: 5px solid red;
-}
-
-.input-section button:hover,
-.filter-buttons button:hover,
-.select-all label:hover {
-    background-color: #e0e0e0;
-    cursor: pointer;
-}
-
-#clearInputBtn {
-    padding: 5px 10px;
-    margin-left: 5px;
-    border: none;
-    background-color: #f0f0f0;
-    cursor: pointer;
-    font-size: 0.8em;
-    border-radius: 5px;
-}
-
-#clearInputBtn:hover {
-    background-color: #e0e0e0;
 }
